@@ -11,4 +11,4 @@ sed -i "s/DB_DATABASE=.*/DB_DATABASE=$DB_NAME/" .env
 sed -i "s/DB_PORT=.*/DB_PORT=$DB_PORT/" .env
 
 php artisan key:generate
-php artisan serve --host=0.0.0.0 --port=8000
+php artisan serve --host=127.0.0.1 --port=8000

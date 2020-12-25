@@ -1,5 +1,6 @@
 <?php
 
+use App\Models\GoodcareAsset;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -14,6 +15,13 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
-});
+//Route::middleware('auth:api')->get('/user', function (Request $request) {
+//    return $request->user();
+//});
+
+Route::post('assets', 'App\Http\Controllers\AssetsController@index');
+
+//Route::post('actives', function () {
+////    return response()->json(['message' => 'actives post request'], 200);
+//    return response()->json(GoodcareAsset::all(),200);
+//});
