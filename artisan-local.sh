@@ -11,4 +11,8 @@ sed -i "s/DB_DATABASE=.*/DB_DATABASE=$DB_NAME/" .env
 sed -i "s/DB_PORT=.*/DB_PORT=$DB_PORT/" .env
 
 php artisan key:generate
+php artisan cache:clear
+php artisan route:clear
+php artisan config:clear
+php artisan view:clear
 php artisan serve --host=127.0.0.1 --port=8000

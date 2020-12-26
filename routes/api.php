@@ -19,9 +19,7 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 
-Route::post('assets', 'App\Http\Controllers\AssetsController@index');
-
-//Route::post('actives', function () {
-////    return response()->json(['message' => 'actives post request'], 200);
-//    return response()->json(GoodcareAsset::all(),200);
-//});
+Route::post('assets', 'App\Http\Controllers\AssetsController@getAssets');
+Route::post('assets/indexes', 'App\Http\Controllers\AssetsController@getIndexes');
+Route::post('assets/shares', 'App\Http\Controllers\AssetsController@getShares');
+Route::post('assets/bonds', 'App\Http\Controllers\AssetsController@getBonds');
