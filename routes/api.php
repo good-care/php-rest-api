@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\GoodcareAsset;
-use Illuminate\Http\Request;
+use App\Http\Controllers\AssetsController;
+use App\Http\Controllers\DefaultController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,7 +19,4 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 
-Route::post('assets', 'App\Http\Controllers\AssetsController@getAssets');
-Route::post('assets/indexes', 'App\Http\Controllers\AssetsController@getIndexes');
-Route::post('assets/shares', 'App\Http\Controllers\AssetsController@getShares');
-Route::post('assets/bonds', 'App\Http\Controllers\AssetsController@getBonds');
+Route::any('assets/{type?}', [AssetsController::class, 'getAssets']);

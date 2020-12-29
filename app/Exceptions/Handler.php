@@ -2,8 +2,12 @@
 
 namespace App\Exceptions;
 
-use http\Exception;
+use App\Http\Controllers\DefaultController;
 use Illuminate\Foundation\Exceptions\Handler as ExceptionHandler;
+use Illuminate\Http\Request;
+use Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
+use Throwable;
 
 class Handler extends ExceptionHandler
 {
@@ -33,13 +37,23 @@ class Handler extends ExceptionHandler
      */
     public function register()
     {
-            //
+
     }
 
-    public function render($request, Exception|\Throwable $e): \Illuminate\Http\Response|\Illuminate\Http\JsonResponse|\Symfony\Component\HttpFoundation\Response
+    public function render($request, Throwable $e): \Illuminate\Http\Response|\Illuminate\Http\JsonResponse|\Symfony\Component\HttpFoundation\Response
     {
-        return response()->json([
-            'message' => 'Resource not found'
-        ], 404);
+        if( $e instanceof ValidException) return $e->render($request);
+        if ($request->isMethod('post') && ($e instanceof NotFoundHttpException || $e instanceof MethodNotAllowedHttpException))
+            return (new DefaultController)->getDefaultJSONAnswer();
+
+        return response()->json(
+                new JsonAnswer(
+                    0,
+                    $e->getMessage(),
+                    null
+                ),
+            500);
+
     }
+
 }

@@ -4,8 +4,10 @@ ENV DB_USERNAME=user
 ENV DB_PASSWORD=pwd
 ENV DB_NAME=postgres
 ENV DB_PORT=5432
+ENV DB_HOST=localhost
 
-RUN apk update && apk add libmcrypt-dev openssl
+RUN apk update && apk add libmcrypt-dev openssl postgresql-dev
+RUN docker-php-ext-install pdo pdo_pgsql
 RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 WORKDIR /app
 COPY . /app
