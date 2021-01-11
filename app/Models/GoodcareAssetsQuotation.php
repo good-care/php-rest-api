@@ -6,13 +6,14 @@
 
 namespace App\Models;
 
+use DateTime;
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Class GoodcareAssetsQuotation
  * 
  * @property int $id
- * @property timestamp without time zone|null $date_time
+ * @property datetime $date_time
  * @property float|null $quotation
  * @property int|null $quotationtype
  * @property int|null $moex_asset_id
@@ -27,7 +28,7 @@ class GoodcareAssetsQuotation extends Model
 	public $timestamps = false;
 
 	protected $casts = [
-		'date_time' => 'timestamp without time zone',
+		'date_time' => 'datetime',
 		'quotation' => 'float',
 		'quotationtype' => 'int',
 		'moex_asset_id' => 'int'

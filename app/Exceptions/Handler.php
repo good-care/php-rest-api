@@ -11,6 +11,17 @@ use Throwable;
 
 class Handler extends ExceptionHandler
 {
+    private DefaultController $defaultController;
+    /**
+     * Handler constructor.
+     * @param DefaultController $defaultController
+     */
+    public function __construct(DefaultController $defaultController)
+    {
+        $this->defaultController = $defaultController;
+    }
+
+
     /**
      * A list of the exception types that are not reported.
      *
@@ -30,6 +41,8 @@ class Handler extends ExceptionHandler
         'password_confirmation',
     ];
 
+
+
     /**
      * Register the exception handling callbacks for the application.
      *
@@ -44,12 +57,13 @@ class Handler extends ExceptionHandler
     {
         if( $e instanceof ValidException) return $e->render($request);
         if ($request->isMethod('post') && ($e instanceof NotFoundHttpException || $e instanceof MethodNotAllowedHttpException))
-            return (new DefaultController)->getDefaultJSONAnswer();
+            return $this->defaultController->getDefaultJSONAnswer();
 
         return response()->json(
                 new JsonAnswer(
                     0,
                     $e->getMessage(),
+                    null,
                     null
                 ),
             500);

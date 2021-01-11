@@ -12,6 +12,7 @@ class DefaultController extends Controller
             new JsonAnswer(
                 0,
                 'Please use the correct requests to access API',
+                null,
                 null
             ),
             400);

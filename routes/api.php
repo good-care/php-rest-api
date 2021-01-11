@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\AssetsController;
 use App\Http\Controllers\DefaultController;
+use App\Http\Controllers\QuotationsController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -19,4 +20,6 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 
+
 Route::any('assets/{type?}', [AssetsController::class, 'getAssets']);
+Route::any('quotations/{assetId}', [AssetsController::class, 'getQuotations']);
