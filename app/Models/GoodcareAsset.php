@@ -13,11 +13,11 @@ use Illuminate\Database\Eloquent\Model;
  * Class GoodcareAsset
  * 
  * @property int $id
- * @property string $name
+ * @property string|null $name
  * @property int|null $assettype
  * @property int|null $currency
  * @property bool|null $is_trade
- * @property string $security_id
+ * @property string|null $security_id
  * @property int|null $issuer_id
  * 
  * @property GoodcareIssuer|null $goodcare_issuer
@@ -29,48 +29,44 @@ use Illuminate\Database\Eloquent\Model;
  */
 class GoodcareAsset extends Model
 {
-    protected $table = 'goodcare_assets';
-    public $timestamps = false;
+	protected $table = 'goodcare_assets';
+	public $timestamps = false;
 
-    protected $casts = [
-        'name' => 'string',
-        'assettype' => 'int',
-        'currency' => 'int',
-        'is_trade' => 'bool',
-        'security_id' => 'string',
-        'issuer_id' => 'int'
-    ];
+	protected $casts = [
+		'name' => 'string',
+		'assettype' => 'int',
+		'currency' => 'int',
+		'is_trade' => 'bool',
+		'security_id' => 'string',
+		'issuer_id' => 'int'
+	];
 
-    protected $fillable = [
-        'name',
-        'assettype',
-        'currency',
-        'is_trade',
-        'security_id',
-        'issuer_id'
-    ];
+	protected $fillable = [
+		'name',
+		'assettype',
+		'currency',
+		'is_trade',
+		'security_id',
+		'issuer_id'
+	];
 
-    /**
-     * @var mixed
-     */
+	public function goodcare_issuer()
+	{
+		return $this->belongsTo(GoodcareIssuer::class, 'issuer_id');
+	}
 
-    public function goodcare_issuer()
-    {
-        return $this->belongsTo(GoodcareIssuer::class, 'issuer_id');
-    }
+	public function goodcare_assets_quotations()
+	{
+		return $this->hasMany(GoodcareAssetsQuotation::class, 'moex_asset_id');
+	}
 
-    public function goodcare_assets_quotations()
-    {
-        return $this->hasMany(GoodcareAssetsQuotation::class, 'moex_asset_id');
-    }
+	public function goodcare_events()
+	{
+		return $this->hasMany(GoodcareEvent::class, 'moex_asset_id');
+	}
 
-    public function goodcare_events()
-    {
-        return $this->hasMany(GoodcareEvent::class, 'moex_asset_id');
-    }
-
-    public function goodcare_portfolios_assets()
-    {
-        return $this->hasMany(GoodcarePortfoliosAsset::class, 'moex_asset_id');
-    }
+	public function goodcare_portfolios_assets()
+	{
+		return $this->hasMany(GoodcarePortfoliosAsset::class, 'moex_asset_id');
+	}
 }

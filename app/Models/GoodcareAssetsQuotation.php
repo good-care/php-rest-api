@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * Class GoodcareAssetsQuotation
  * 
  * @property int $id
- * @property datetime $date_time
+ * @property datetime|null $date_time
  * @property float|null $quotation
  * @property int|null $quotationtype
  * @property int|null $moex_asset_id

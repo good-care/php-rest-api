@@ -13,7 +13,7 @@ use Illuminate\Database\Eloquent\Model;
  * Class GoodcareIssuer
  * 
  * @property int $id
- * @property string $name
+ * @property string|null $name
  * 
  * @property Collection|GoodcareAsset[] $goodcare_assets
  *

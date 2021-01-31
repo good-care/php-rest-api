@@ -12,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * Class GoodcarePortfoliosAsset
  * 
  * @property int $id
- * @property string $name
+ * @property string|null $name
  * @property float|null $cost
  * @property float|null $number
  * @property float|null $quotation

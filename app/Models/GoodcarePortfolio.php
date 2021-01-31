@@ -13,12 +13,12 @@ use Illuminate\Database\Eloquent\Model;
  * Class GoodcarePortfolio
  * 
  * @property int $id
- * @property string $name
+ * @property string|null $name
  * @property float|null $cost
  * @property int|null $currency
- * @property int|null $account_id
+ * @property int|null $user_id
  * 
- * @property GoodcareAccount|null $goodcare_account
+ * @property GoodcareUser|null $goodcare_user
  * @property Collection|GoodcareEvent[] $goodcare_events
  * @property Collection|GoodcarePortfoliosAsset[] $goodcare_portfolios_assets
  *
@@ -33,19 +33,19 @@ class GoodcarePortfolio extends Model
 		'name' => 'string',
 		'cost' => 'float',
 		'currency' => 'int',
-		'account_id' => 'int'
+		'user_id' => 'int'
 	];
 
 	protected $fillable = [
 		'name',
 		'cost',
 		'currency',
-		'account_id'
+		'user_id'
 	];
 
-	public function goodcare_account()
+	public function goodcare_user()
 	{
-		return $this->belongsTo(GoodcareAccount::class, 'account_id');
+		return $this->belongsTo(GoodcareUser::class, 'user_id');
 	}
 
 	public function goodcare_events()

@@ -16,7 +16,8 @@
         "guzzlehttp/guzzle": "^7.0.1",
         "laravel/framework": "^8.21",
         "laravel/tinker": "^2.5",
-        "reliese/laravel": "^v0.0.19"
+        "reliese/laravel": "^v0.0.19",
+        "ext-openssl": "*"
     },
     "require-dev": {
         "facade/ignition": "^2.5",

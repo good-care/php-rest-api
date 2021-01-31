@@ -1,9 +1,10 @@
 <?php
 
 use App\Http\Controllers\AssetsController;
-use App\Http\Controllers\DefaultController;
-use App\Http\Controllers\QuotationsController;
+use App\Http\Controllers\UserController;
+use App\Http\Middleware\Guard;
 use Illuminate\Support\Facades\Route;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -20,6 +21,11 @@ use Illuminate\Support\Facades\Route;
 //    return $request->user();
 //});
 
+Route::middleware([Guard::class])->group(function (){
+    Route::any('userdata', [UserController::class, 'getUserData']);
+});
 
 Route::any('assets/{type?}', [AssetsController::class, 'getAssets']);
 Route::any('quotations/{assetId}', [AssetsController::class, 'getQuotations']);
+Route::any('signup', [UserController::class, 'signUp']);
+Route::any('signin', [UserController::class, 'signIn']);
