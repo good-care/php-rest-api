@@ -55,11 +55,11 @@ class UserController extends Controller
         $user->password = password_hash($password, PASSWORD_BCRYPT, $options);
 
         if ($user->save()) {
-            $userToken = new GoodcareUserToken();
-            $userToken->token = Token::get($user->login, $user->login);
-            $userToken->save();
-            $user->token_id = $userToken->id;
-            $user->update();
+//            $userToken = new GoodcareUserToken();
+//            $userToken->token = Token::get($user->login, $user->login);
+//            $userToken->save();
+//            $user->token_id = $userToken->id;
+//            $user->update();
             return response()->json(
                 new JsonAnswer(
                     1,
@@ -90,11 +90,12 @@ class UserController extends Controller
         $message = 'Invalid login or password';
         $code = 0;
         if ($user && password_verify($password, $user->password)) {
-            $userToken = $user->goodcare_user_token;
-            $userToken->token = Token::get($user->id, $user->login);
-            $userToken->update();
-            $message = $userToken->token;
+//            $userToken = $user->goodcare_user_token;
+//            $userToken->token = Token::get($user->id, $user->login);
+//            $userToken->update();
+//            $message = $userToken->token;
             $code = 1;
+            $message = Token::get($user->id, $user->login);
         }
 
         return response()->json(
