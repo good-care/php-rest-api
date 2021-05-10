@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Exceptions\JsonAnswer;
 use App\Http\Token;
+use App\Models\GoodcarePortfolio;
 use App\Models\GoodcareUser;
 use App\Models\GoodcareUserToken;
 use Illuminate\Http\Request;
@@ -55,11 +56,13 @@ class UserController extends Controller
         $user->password = password_hash($password, PASSWORD_BCRYPT, $options);
 
         if ($user->save()) {
-//            $userToken = new GoodcareUserToken();
-//            $userToken->token = Token::get($user->login, $user->login);
-//            $userToken->save();
-//            $user->token_id = $userToken->id;
-//            $user->update();
+            $portfolio = new GoodcarePortfolio();
+            $portfolio->name = "default";
+            $portfolio->cost = 0;
+            $portfolio->currency = 0;
+            $portfolio->user_id = $user->id;
+            $portfolio->save();
+
             return response()->json(
                 new JsonAnswer(
                     1,
@@ -90,12 +93,8 @@ class UserController extends Controller
         $message = 'Invalid login or password';
         $code = 0;
         if ($user && password_verify($password, $user->password)) {
-//            $userToken = $user->goodcare_user_token;
-//            $userToken->token = Token::get($user->id, $user->login);
-//            $userToken->update();
-//            $message = $userToken->token;
             $code = 1;
-            $message = Token::get($user->id, $user->login);
+            $message = Token::get($user->id, $user->login, 600);
         }
 
         return response()->json(

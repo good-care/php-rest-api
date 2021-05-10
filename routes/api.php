@@ -23,9 +23,12 @@ use Illuminate\Support\Facades\Route;
 
 Route::middleware([Guard::class])->group(function (){
     Route::any('userdata', [UserController::class, 'getUserData']);
+    Route::any('addToPortfolio', [AssetsController::class, 'addToPortfolio']);
+    Route::any('getPortfolio', [AssetsController::class, 'getPortfolio']);
 });
 
 Route::any('assets/{type?}', [AssetsController::class, 'getAssets']);
 Route::any('quotations/{assetId}', [AssetsController::class, 'getQuotations']);
+Route::any('assetInfo/{assetId}', [AssetsController::class, 'getAssetInfo']);
 Route::any('signup', [UserController::class, 'signUp']);
 Route::any('signin', [UserController::class, 'signIn']);

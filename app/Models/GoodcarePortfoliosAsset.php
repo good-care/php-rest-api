@@ -18,6 +18,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property float|null $quotation
  * @property int|null $moex_asset_id
  * @property int|null $portfolio_id
+ * @property datetime|null $date_time
  * 
  * @property GoodcareAsset|null $goodcare_asset
  * @property GoodcarePortfolio|null $goodcare_portfolio
@@ -35,7 +36,8 @@ class GoodcarePortfoliosAsset extends Model
 		'number' => 'float',
 		'quotation' => 'float',
 		'moex_asset_id' => 'int',
-		'portfolio_id' => 'int'
+		'portfolio_id' => 'int',
+        'date_time' => 'datetime'
 	];
 
 	protected $fillable = [
@@ -44,7 +46,8 @@ class GoodcarePortfoliosAsset extends Model
 		'number',
 		'quotation',
 		'moex_asset_id',
-		'portfolio_id'
+		'portfolio_id',
+        'date_time'
 	];
 
 	public function goodcare_asset()
